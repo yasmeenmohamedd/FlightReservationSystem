@@ -1,0 +1,8 @@
+create or replace PROCEDURE GetTicketId(ID OUT SYS_REFCURSOR,PID IN NUMBER)
+ as
+ begin
+ open ID for
+ select T.TICKET_ID
+ from TICKET_ T
+ where t.passenger_id= PID;
+ END;

@@ -1,0 +1,84 @@
+CREATE TABLE Passenger_
+(
+  Passenger_ID INT NOT NULL,
+  First_name VARCHAR(20) NOT NULL,
+  Last_name VARCHAR(20) NOT NULL,
+  Email VARCHAR(20) NOT NULL,
+  Sex VARCHAR(20) NOT NULL,
+  Mobile_num NUMERIC NOT NULL,
+  PRIMARY KEY (Passenger_ID)
+);
+CREATE TABLE Airport
+(
+  Airport_code INT NOT NULL,
+  Airport_name VARCHAR(20) NOT NULL,
+  Address VARCHAR(20) NOT NULL,
+  Airport_city VARCHAR(20) NOT NULL,
+  PRIMARY KEY (Airport_code)
+);
+CREATE TABLE Airplane_Type
+(
+  Type_name VARCHAR(20) NOT NULL,
+  Total_seats VARCHAR(20) NOT NULL,
+  PRIMARY KEY (Type_name)
+);
+CREATE TABLE Airplane_Model
+(
+  Airplane_ID INT NOT NULL,
+  Num_seats INT NOT NULL,
+  PRIMARY KEY (Airplane_ID)
+);
+CREATE TABLE Flight
+(
+  Flight_num INT NOT NULL,
+  Airline VARCHAR(20) NOT NULL,
+  Reserved_seats INT NOT NULL,
+  Airport_code INT NOT NULL,
+  PRIMARY KEY (Flight_num),
+  FOREIGN KEY (Airport_code) REFERENCES Airport(Airport_code)
+);
+CREATE TABLE Lands_On
+(
+  Type_name VARCHAR(20) NOT NULL,
+  Airport_code INT NOT NULL,
+  PRIMARY KEY (Type_name, Airport_code),
+  FOREIGN KEY (Type_name) REFERENCES Airplane_Type(Type_name),
+  FOREIGN KEY (Airport_code) REFERENCES Airport(Airport_code)
+);
+CREATE TABLE Ticket_
+(
+  Ticket_ID INT NOT NULL,
+  Seat_num INT NOT NULL,
+  Passeger_Name VARCHAR(20) NOT NULL,
+  Boarding_time DATE NOT NULL,
+  Arrival_time DATE NOT NULL,
+  Depature_time DATE NOT NULL,
+  Day_Ticket INT NOT NULL,
+  Month_Ticket INT NOT NULL,
+  Year_Ticket INT NOT NULL,
+  Passenger_ID INT NOT NULL,
+  PRIMARY KEY (Ticket_ID),
+  FOREIGN KEY (Passenger_ID) REFERENCES Passenger_(Passenger_ID)
+);
+CREATE TABLE Fees
+(
+  Code_num INT NOT NULL,
+  Ticket_ID INT NOT NULL,
+  PRIMARY KEY (Code_num),
+  FOREIGN KEY (Ticket_ID) REFERENCES Ticket_(Ticket_ID)
+);
+CREATE TABLE Type_
+(
+  Ticket_ID INT NOT NULL,
+  Type_name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (Ticket_ID, Type_name),
+  FOREIGN KEY (Ticket_ID) REFERENCES Ticket_(Ticket_ID),
+  FOREIGN KEY (Type_name) REFERENCES Airplane_Type(Type_name)
+);
+CREATE TABLE Ticket_Type
+(
+  TypeOfTicket VARCHAR(20) NOT NULL,
+  Ticket_ID INT NOT NULL,
+  PRIMARY KEY (TypeOfTicket, Ticket_ID),
+  FOREIGN KEY (Ticket_ID) REFERENCES Ticket_(Ticket_ID)
+);

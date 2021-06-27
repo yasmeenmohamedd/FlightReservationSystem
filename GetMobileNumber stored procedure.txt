@@ -1,0 +1,8 @@
+CREATE OR REPLACE PROCEDURE GetMobileNumber(mobilenum out Number,passID in NUMBER)
+ as
+ begin
+ select M.MOBILE_NUM
+ into mobilenum
+ from PASSENGER_ M
+ where M.PASSENGER_ID = passID;
+ end;
